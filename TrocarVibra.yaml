@@ -1,0 +1,283 @@
+appId: com.brapp.work
+---
+# 1. Chamada do script JS solicitado
+- runScript:
+    file: scripts/generate_search.js
+
+# 2. Chamada do subfluxo solicitado (corrigido para caminho relativo a raiz)
+- runFlow:
+    file: E2E/Integracao.vscode/TrocarVibra.yaml
+
+# Contexto: Acessar a tela de Trocar
+# Dado que estou logado no aplicativo Vibra Premmia com a sessão ativa
+- launchApp:
+    clearState: false
+
+# Quando eu seleciono a opção "Trocar" na barra de navegação inferior
+- assertVisible:
+    id: "tab-bar-loyalty"
+- tapOn:
+    id: "tab-bar-loyalty"
+- waitForAnimationToEnd
+
+# (Para garantir que estamos no topo da tela, fazemos swipes para cima)
+- swipe:
+    start: 50%, 30%
+    end: 50%, 75%
+- swipe:
+    start: 50%, 30%
+    end: 50%, 75%
+- waitForAnimationToEnd
+
+# ==============================================================================
+# Cenário: Visualizar produtos da seção Cupons Para Você
+# Quando eu seleciono "Ver tudo" na seção "Cupons para você"
+# ==============================================================================
+- scrollUntilVisible:
+    element: "Cupons para você"
+    direction: DOWN
+    timeout: 200000
+    centerElement: true
+- waitForAnimationToEnd
+# Clica no PRIMEIRO botão "Ver tudo" (Seção Cupons)
+- tapOn:
+    text: "Ver tudo"
+    index: 0
+- waitForAnimationToEnd
+
+# Então devo visualizar a listagem de todos os produtos disponíveis para resgate
+- assertVisible: "Cupons para você"
+
+# E devo scrolar a tela até visualizar o ultimo produto
+- swipe:
+    start: 50%, 80%
+    end: 50%, 20%
+- swipe:
+    start: 50%, 80%
+    end: 50%, 20%
+- waitForAnimationToEnd
+
+# E cada produto deve exibir o botão "Resgatar" destacado na cor verde
+- assertVisible: "Resgatar"
+
+# Retorna para a tela principal de Trocar
+- back
+- waitForAnimationToEnd
+
+# (Volta para o topo para garantir posicionamento correto dos scrolls seguintes)
+- swipe:
+    start: 50%, 20%
+    end: 50%, 80%
+- swipe:
+    start: 50%, 20%
+    end: 50%, 80%
+- waitForAnimationToEnd
+
+# ==============================================================================
+# Cenário: Explorar ofertas e cupons da seção BR Mania
+# Quando encontra a seção de BR Mania
+# E scrolar até visualizar o botão "Ver tudo"
+# E clicar no botão
+# ==============================================================================
+- swipe:
+    start: 50%, 80%
+    end: 50%, 20%
+# 1. Força a rolagem até que a seção esteja visível E centralizada na tela
+- scrollUntilVisible:
+    element:
+      text: "BR Mania"
+    direction: DOWN
+    centerElement: true        # <-- Garante que o elemento seja arrastado para o meio da tela, revealing o botão abaixo dele
+    visibilityPercentage: 100 # <-- Exige que todo o elemento de texto esteja na tela antes de parar o scroll
+    timeout: 20000            # <-- Tempo limite padrão para busca caso a tela seja longa
+- waitForAnimationToEnd
+
+# Ajuste fino: puxa a tela um pouquinho para cima antes de clicar
+- swipe:
+    start: 50%, 50%
+    end: 50%, 40%
+# 2. Clica no botão "Ver tudo" posicionado logo abaixo do título
+- tapOn:
+    text: "Ver tudo"
+    below: "BR Mania"
+- waitForAnimationToEnd
+# Então na aba “Ofertas” vou scrollar para visualizar todos os produtos
+- assertVisible: "Ofertas"
+- assertVisible: "Cupons"
+- swipe:
+    start: 50%, 80%
+    end: 50%, 20%
+- swipe:
+    start: 50%, 80%
+    end: 50%, 20%
+- waitForAnimationToEnd
+
+# (Rola de volta para o topo para revelar o tab bar "Cupons")
+- swipe:
+    start: 50%, 20%
+    end: 50%, 80%
+- swipe:
+    start: 50%, 20%
+    end: 50%, 80%
+- waitForAnimationToEnd
+
+# E mudo para a aba "Cupons"
+- tapOn:
+    id: "tab-item-pressable"
+    index: 1
+- waitForAnimationToEnd
+
+# Então devo visualizar os cupons de desconto disponíveis para a BR Mania
+- assertVisible: "Cupom de R$2,50 por 300 pontos BR Mania"
+
+# E clico em voltar para a tela principal de Trocar
+- back
+- waitForAnimationToEnd
+
+# (Volta para o topo para garantir posicionamento correto)
+- swipe:
+    start: 50%, 20%
+    end: 50%, 80%
+- swipe:
+    start: 50%, 20%
+    end: 50%, 80%
+- waitForAnimationToEnd
+
+# ==============================================================================
+# Cenário: Consultar parceiros de transferência de pontos na seção Viagens
+# Quando eu seleciono "Ver tudo" na seção "Viagens"
+# ==============================================================================
+- swipe:
+    start: 50%, 80%
+    end: 50%, 20%
+# 1. Força a rolagem até que a seção esteja visível E centralizada na tela
+- scrollUntilVisible:
+    element:
+      text: "Viagens"
+    direction: DOWN
+    centerElement: true        # <-- Garante que o elemento seja arrastado para o meio da tela, revelando o botão abaixo dele
+    visibilityPercentage: 100 # <-- Exige que todo o elemento de texto esteja na tela antes de parar o scroll
+    timeout: 20000            # <-- Tempo limite padrão para busca caso a tela seja longa
+- waitForAnimationToEnd
+
+# Ajuste fino: puxa a tela um pouquinho para cima antes de clicar
+- swipe:
+    start: 50%, 50%
+    end: 50%, 40%
+# Clica no botão "Ver tudo" que estiver à direita do texto "Viagens"
+- tapOn:
+    text: "Ver tudo"
+    rightOf: "Viagens"
+    below: "Viagens"
+- waitForAnimationToEnd
+# Então na aba “Ofertas” vou scrollar para visualizar todos os produtos
+- swipe:
+    start: 50%, 80%
+    end: 50%, 20%
+- swipe:
+    start: 50%, 80%
+    end: 50%, 20%
+- waitForAnimationToEnd
+
+# Retorna para a tela principal de Trocar
+- back
+- waitForAnimationToEnd
+
+# (Volta para o topo para garantir posicionamento correto)
+- swipe:
+    start: 50%, 20%
+    end: 50%, 80%
+- swipe:
+    start: 50%, 20%
+    end: 50%, 80%
+- waitForAnimationToEnd
+
+# ==============================================================================
+# Cenário: Visualizar produtos da seção Lubrax
+# Quando eu seleciono "Ver tudo" na seção "Lubrax"
+# ==============================================================================
+- swipe:
+    start: 50%, 80%
+    end: 50%, 20%
+- swipe:
+    start: 50%, 80%
+    end: 50%, 20%
+# 1. Força a rolagem até que a seção esteja visível E centralizada na tela
+- scrollUntilVisible:
+    element:
+      text: "Lubrax"
+    direction: DOWN
+    centerElement: true        # <-- Garante que o elemento seja arrastado para o meio da tela, revelando o botão abaixo dele
+    visibilityPercentage: 100 # <-- Exige que todo o elemento de texto esteja na tela antes de parar o scroll
+    timeout: 20000            # <-- Tempo limite padrão para busca caso a tela seja longa
+- waitForAnimationToEnd
+
+# Ajuste fino: puxa a tela um pouquinho para cima antes de clicar
+- swipe:
+    start: 50%, 50%
+    end: 50%, 40%
+# 2. Clica no botão "Ver tudo" posicionado logo abaixo do título
+- tapOn:
+    text: "Ver tudo"
+    below: "Lubrax"
+
+# Então devo visualizar todos os produtos e lubrificantes disponíveis para resgate
+- assertVisible: "Lubrax"
+- tapOn: "Cupons"
+- waitForAnimationToEnd
+
+# Retorna para a tela principal de Trocar
+- back
+- waitForAnimationToEnd
+
+# (Volta para o topo para garantir posicionamento correto)
+- swipe:
+    start: 50%, 20%
+    end: 50%, 80%
+- swipe:
+    start: 50%, 20%
+    end: 50%, 80%
+- waitForAnimationToEnd
+
+# ==============================================================================
+# Cenário: Consultar a seção de ajuda
+# Quando eu acesso a seção "Precisando de ajuda?"
+# ==============================================================================
+- swipe:
+    start: 50%, 80%
+    end: 50%, 20%
+- swipe:
+    start: 50%, 80%
+    end: 50%, 20%
+- swipe:
+    start: 50%, 80%
+    end: 50%, 20%
+- waitForAnimationToEnd
+
+# E seleciono uma dúvida frequente
+- tapOn: "Como eu ganho pontos?"
+- waitForAnimationToEnd
+# Então a resposta correspondente deve ser exibida detalhadamente
+
+# Faz um swipe para cima para revelar o botão da Central de ajuda que foi deslocado para baixo
+- swipe:
+    start: 50%, 80%
+    end: 50%, 20%
+- waitForAnimationToEnd
+
+- tapOn: "Central de ajuda"
+- tapOn:
+    id: "undefined-icon-button"
+# Retorna para o topo e finaliza o fluxo no menu Início
+- swipe:
+    start: 50%, 20%
+    end: 50%, 80%
+- swipe:
+    start: 50%, 20%
+    end: 50%, 80%
+- swipe:
+    start: 50%, 20%
+    end: 50%, 80%
+- waitForAnimationToEnd
+- tapOn:
+    id: "tab-bar-home"

@@ -1,0 +1,69 @@
+appId: com.brapp.work
+---
+- launchApp:
+    clearState: false
+# Seu fluxo de teste começa aqui diretamente nas telas internas
+- tapOn:
+    point: 82%,27%
+- tapOn:
+    id: "home-header-user-icon-test-id"
+- scrollUntilVisible:
+    element: "Precisa de ajuda?"
+- assertVisible: "Precisa de ajuda?"
+- scrollUntilVisible:
+    element: "WhatsApp"
+- tapOn: "Ligue para 4090-1337"
+- tapOn: "Vis\u00e3o geral"
+- tapOn:
+    id: "snapshot"
+- tapOn: "Ligue para 0800-770-1337"
+- tapOn: "Vis\u00e3o geral"
+- tapOn:
+    id: "snapshot"
+- tapOn: "WhatsApp"
+- tapOn: "Voltar"
+- tapOn: "E-mail"
+- scrollUntilVisible:
+    element: "Conhe\u00e7a os mascotes Lu & Br\u00e1s"
+- tapOn: "Voltar"
+- scrollUntilVisible:
+    element: "Precisa de ajuda?"
+    direction: UP # Procura o elemento subindo a tela
+    timeout: 10000
+- tapOn: "Central de ajuda"
+- scrollUntilVisible:
+    element: "WhatsApp"
+- scrollUntilVisible:
+    element: "D\u00favidas Frequentes"
+    direction: UP # Procura o elemento subindo a tela
+    timeout: 10000
+- scrollUntilVisible:
+    element: "Precisa de ajuda?"
+- tapOn: "Precisa de ajuda?"
+- tapOn: "Voltar"
+- scrollUntilVisible:
+    element: "D\u00favidas Frequentes"
+    direction: UP # Procura o elemento subindo a tela
+    timeout: 10000
+- tapOn: "Como funciona o Programa?"
+- tapOn:
+    id: "undefined-icon-button"
+- scrollUntilVisible:
+    element: "Precisa de algo?"
+    direction: UP # Procura o elemento subindo a tela
+    timeout: 10000
+- tapOn: "Clube Premmia"
+- tapOn: "O que acontece se o pagamento do meu Clube Premmia n\u00e3o estiver em dia?"
+- tapOn:
+    point: 9%,8%
+- tapOn:
+    point: 9%,8%
+- assertVisible: "Busca por palavra-chave"
+- inputText: "Cadastro"
+- tapOn:
+    point: 77%,9%
+- tapOn:
+    point: 19%,10%
+- tapOn:
+    point: 10%,8%
+

@@ -1,0 +1,24 @@
+{
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/mobile-dev-inc/maestro/main/maestro-client/src/main/resources/schema.json": [
+      "*.yaml",
+      "*.yml"
+    ]
+  },
+  "mcpServers": {
+    "meu-servidor": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "C:\\Users\\julli.silva_sofist\\seu-projeto-aqui"
+      ]
+    },
+    "maestro": {
+      "command": "C:\\maestro\\maestro\\maestro\\bin",
+      "args": [
+        "mcp"
+      ]
+    }
+  }
+}

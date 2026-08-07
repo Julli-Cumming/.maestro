@@ -1,0 +1,42 @@
+appId: com.brapp.work
+---
+- launchApp:
+    clearState: false
+- assertVisible:
+    point: 0%,28%
+- assertVisible:
+    id: "undefined-section"
+- tapOn: "Ver mapa"
+- assertVisible:
+    point: 0%,65%
+- tapOn: "Recentes"
+- tapOn: "Tra\u00e7ar rota"
+- assertVisible: "Selecione um App"
+- tapOn:
+    id: "bottom-sheet-backdrop"
+- tapOn: "Pagar"
+- assertVisible:
+    point: 0%,53%
+- tapOn:
+    id: "bottom-sheet-backdrop"
+- tapOn:
+    id: "undefined-icon-button"
+- tapOn:
+    point: 7%,9%
+- tapOn:
+    point: 75%,52%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

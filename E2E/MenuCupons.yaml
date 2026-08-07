@@ -1,0 +1,28 @@
+appId: com.brapp.work
+---
+- launchApp:
+    clearState: false
+- assertVisible:
+    point: 4%,86%
+- tapOn: "Cupons"
+- tapOn: "Inserir novo cupom"
+- inputText: "CUPOM_HML_08"
+- tapOn: "Ativar"
+- tapOn: "Ativar"
+- tapOn: "Ver todos"
+- tapOn:
+    id: "coupon-container"
+- tapOn: "Ver lista"
+- tapOn:
+    point: 7%,9%
+- tapOn:
+    point: 9%,9%
+- tapOn:
+    id: "undefined-icon-button"
+- assertVisible:
+    point: 4%,86%
+- tapOn: "In\u00edcio"
+
+
+
+

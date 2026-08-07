@@ -1,0 +1,28 @@
+appId: com.brapp.work
+---
+- launchApp:
+    clearState: false
+- assertVisible: "Saldo de pontos" # 1. Espera a tela carregar esperando por este elemento
+- scrollUntilVisible:
+    element:
+     
+    timeout: 20000 
+- tapOn: "Ver tudo"
+- tapOn: "In\u00edcio"
+- scrollUntilVisible:
+    element: "Voc\u00ea est\u00e1 no posto"
+    direction: UP  # Procura o elemento subindo a tela
+- assertVisible: "Voc\u00ea est\u00e1 no posto"
+
+
+
+
+
+
+
+
+
+
+
+
+

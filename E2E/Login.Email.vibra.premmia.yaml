@@ -1,0 +1,27 @@
+appId: com.brapp.work
+---
+- launchApp:
+    clearState: true
+- tapOn: "Vamos come\u00e7ar?"
+- tapOn:
+    id: "input-cpf-signin-text-input"
+- inputText: "74873540089"
+- tapOn: "Continuar"
+- tapOn:
+    id: "signin-password-text-input"
+- inputText: "123456"
+- tapOn: "Continuar"
+- tapOn: "E-mail"
+- tapOn:
+    id: "code-confirmation-email-text-input"
+- assertVisible: "C\u00f3digo de confirma\u00e7\u00e3o enviado para\nj*****a@sofist.co"
+# 1. Busca o token de e-mail na API usando o script e o CPF do usuário
+- runScript:
+    file: Integracao.vscode/pegar-token.js
+    env:
+      LOGIN_ID: "74873540089"
+- tapOn:
+    id: "code-confirmation-email-text-input"
+# 2. Insere o token recebido dinamicamente da API
+- inputText: ${output.sfToken}
+- tapOn: "Continuar"

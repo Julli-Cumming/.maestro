@@ -1,0 +1,29 @@
+appId: com.brapp.work
+---
+- launchApp:
+    clearState: false
+- tapOn:
+    id: "home-header-user-icon-test-id"
+- tapOn:
+    id: "undefined-icon-button"
+- tapOn:
+    point: 22%,33%
+- tapOn:
+    point: 49%,63%
+- tapOn: "Salvar"
+- scrollUntilVisible:
+    element: "Dev Menu"
+    timeout: 40000
+- scrollUntilVisible:
+    element: "Cupons, N\u00e3o h\u00e1 cupons dispon\u00edveis"
+    direction: UP # Procura o elemento subindo a tela
+    timeout: 40000
+- tapOn:
+    id: "undefined-close-button-icon-button"
+
+
+
+
+
+
+

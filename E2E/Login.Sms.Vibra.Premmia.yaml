@@ -1,0 +1,29 @@
+appId: com.brapp.work
+---
+- launchApp:
+    clearState: true
+- tapOn: "Vamos come\u00e7ar?"
+- tapOn:
+    id: "input-cpf-signin-text-input"
+- inputText: "74873540089"
+- tapOn: "Continuar"
+- tapOn:
+    id: "signin-password-text-input"
+- inputText: "123456"
+- tapOn: "Continuar"
+- tapOn: "SMS"
+- tapOn:
+    id: "code-confirmation-email-text-input"
+- assertVisible: "C\u00f3digo de confirma\u00e7\u00e3o enviado para\n(71)9****-7147"
+# 1. Executa o script que criamos para buscar o token
+- runScript:
+    file: Integracao.vscode/pegar-token.js
+    env:
+      LOGIN_ID: "74873540089"
+# 2. Continua o fluxo normal do app
+- tapOn:
+    id: "code-confirmation-email-text-input" # ou "Usuário", dependendo de como é o seu app
+# 3. Insere o token retornado pela integração SF usando a variável dinâmica ${}
+- inputText: ${output.sfToken}
+# 4. Finaliza o login
+- tapOn: "Continuar"

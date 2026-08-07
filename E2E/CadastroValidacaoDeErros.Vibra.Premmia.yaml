@@ -1,0 +1,162 @@
+appId: com.brapp.work
+---
+- launchApp:
+    clearState: true
+- tapOn: "Vamos come\u00e7ar?"
+#Validar fluxo de CPF inválido
+- tapOn:
+    id: "input-cpf-signin-text-input"
+- inputText: "45897553000"
+- tapOn: "Continuar"
+- assertVisible: "CPF inv\u00e1lido."
+# 1. Clica no campo para dar foco
+- tapOn:
+    id: "input-cpf-signin-text-input"
+# 2. Apaga o texto atual
+- repeat:
+    times: 14
+    commands:
+      - pressKey: Backspace
+# 3. Digita o novo texto (o Maestro geralmente limpa o antigo automaticamente)
+- inputText: "45897553009"
+- tapOn: "Continuar"
+#Nome inválido
+- tapOn:
+    id: "first-name-signup-text-input"
+- inputText: "F"
+- tapOn: "Continuar"
+- assertVisible: "Nome inv\u00e1lido"
+# 2. Apaga o texto atual
+- tapOn:
+    id: "first-name-signup-text-input"
+- repeat:
+    times: 1
+    commands:
+      - pressKey: Backspace
+- inputText: "George Felipe"
+#Sobrenome
+- tapOn:
+    id: "last-name-signup-text-input"
+- inputText: "h"
+- tapOn: "Continuar"
+- assertVisible: "Sobrenome inv\u00e1lido"
+# 2. Apaga o texto atual
+- tapOn:
+    id: "last-name-signup-text-input"
+- repeat:
+    times: 1
+    commands:
+      - pressKey: Backspace
+- inputText: "Santos"
+#dataNascimento menor de idade
+- tapOn:
+    id: "birthday-signup-text-input"
+- inputText: "12092017"
+- tapOn: "Continuar"
+- assertVisible: "Voc\u00ea precisa ser maior de 18 anos para participar do Premmia"
+# 2. Apaga o texto atual
+- tapOn:
+    id: "birthday-signup-text-input"
+- repeat:
+    times: 10
+    commands:
+      - pressKey: Backspace
+- inputText: "12091989"
+- tapOn: "Continuar"
+#Email
+- tapOn: "exemplo@email.com"    
+- inputText: "george"
+- tapOn: "Continuar"
+- assertVisible: "E-mail inv\u00e1lido"
+- tapOn: "exemplo@email.com" 
+# 2. Apaga o texto atual
+- repeat:
+    times: 6
+    commands:
+      - pressKey: Backspace
+- inputText: "georgefelipe@gmail.com"
+#Celular
+- tapOn: "(00) 00000-0000"
+- inputText: "1498789098"
+- tapOn: "Continuar"
+- assertVisible: "Celular inv\u00e1lido"
+- tapOn: 
+    below: "Celular"
+# 2. Apaga o texto atual
+- repeat:
+    times: 14
+    commands:
+      - pressKey: Backspace
+- inputText: "14990909090"
+- tapOn: "Continuar"
+#Senha e Repetir senha
+- tapOn:
+    id: "password-signup-text-input"
+- inputText: "12345"
+- tapOn:
+    point: 81%,26%
+- tapOn:
+    id: "confirm-password-signup-text-input"
+- inputText: "12345"
+- tapOn:
+    point: 81%,38%
+- assertVisible: "Ter 6 n\u00fameros"
+- assertVisible: "As senhas devem ser iguais"
+- tapOn: 
+    below: "Senha"
+# 2. Apaga o texto atual senha
+- repeat:
+    times: 5
+    commands:
+      - pressKey: Backspace
+- inputText: "123456"
+- tapOn: 
+    below: "Repetir senha"
+# 2. Apaga o texto atual repetir senha
+- repeat:
+    times: 5
+    commands:
+      - pressKey: Backspace
+- inputText: "123456"
+# Acordos
+- tapOn: "Li e concordo com o Termos e condi\u00e7\u00f5es"
+- assertVisible: "Termos e condi\u00e7\u00f5es"
+- tapOn:
+    point: 9%,8%
+#clicar no primero checkbox
+- tapOn:
+    id: "checkbox"  # CORREÇÃO: O ID correto provavelmente é "checkbox"
+    index: 0        # Especifica que é o primeiro da lista
+- tapOn: "Estou ciente da Pol\u00edtica de Privacidade da\nVibra e do Aviso Complementar de\n Privacidade do Programa de Fidelidade\nPetrobras Premmia"
+- assertVisible: "Pol\u00edtica de Privacidade da\nVibra e do Aviso Complementar de\n Privacidade do Programa de Fidelidade\nPetrobras Premmia"
+- tapOn:
+    point: 9%,8%
+# 2. Clica no SEGUNDO checkbox (índice 1)
+- tapOn:
+    id: "checkbox"  # Usa o mesmo ID
+    index: 1        # Especifica que é o segundo da lista
+- tapOn: "Continuar"
+#Por Onde deseja receber o codigo
+- assertVisible: "Por onde voc\u00ea quer receber o c\u00f3digo pra confirmar a conta?"
+- tapOn: "E-mail"
+- tapOn: "Cancelar"
+- assertVisible: "Deseja cancelar?"
+- assertVisible: "Ao cancelar, voc\u00ea voltar\u00e1 para a tela inicial e precisar\u00e1 come\u00e7ar novamente."
+- tapOn: "Voltar"
+#- tapOn: "Cancelar"
+#- tapOn: "Confirmar"
+#Tela de inserir o codigo
+- assertVisible: "Digite o c\u00f3digo recebido e confirme sua conta"
+- assertVisible: "C\u00f3digo de confirma\u00e7\u00e3o enviado para\ntestautomatio@gmail.com"
+# 1. Busca o token de e-mail na API usando o script e o CPF do usuário
+#- runScript:
+   # file: Integracao.vscode/pegar-token.js
+    #env:
+     # LOGIN_ID: "83141192022"
+- tapOn:
+    id: "code-confirmation-email-text-input"
+- inputText: "111111"
+# 2. Insere o token recebido dinamicamente da API
+#- inputText: ${output.sfToken}
+#- assertVisible: "C\u00f3digo expira em 3:55"
+- tapOn: "Continuar"

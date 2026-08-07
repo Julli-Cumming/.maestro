@@ -1,0 +1,51 @@
+appId: com.brapp.work
+---
+- launchApp:
+    clearState: false
+- tapOn:
+    id: "home-header-user-icon-test-id"
+- tapOn:
+    point: 81%,59%
+- scrollUntilVisible:
+    element: "Excluir conta"
+- assertVisible: "Escolha e ganhe 200 pts"
+- tapOn:
+    point: 81%,73%
+- tapOn:
+    point: 13%,19%
+- tapOn: "Confirmar"
+- assertVisible: "Motorista comum"
+
+#Alteracao do Tipo de Motorista sem restrição
+- tapOn:
+    id: "home-header-user-icon-test-id"
+- tapOn:
+    point: 81%,59%
+- scrollUntilVisible:
+    element: "Excluir conta"
+- tapOn:
+    point: 81%,73%
+- tapOn:
+    point: 13%,48%
+- tapOn: "Confirmar"
+
+#Alteracao do Tipo de Motorista com restrição
+- tapOn:
+    point: 81%,73%
+- tapOn:
+    point: 13%,38%
+- tapOn: "Confirmar"
+- assertVisible: "Você já pediu a mudança do seu tipo de motorista antes. Aguarde até 3 dias para que a alteração seja concluída e tente novamente depois disso."
+- tapOn: "Confirmar"
+- tapOn:
+    point: 9%,8%
+- tapOn:
+    point: 9%,8%
+- tapOn:
+    point: 85%,6%
+
+
+
+
+
+
