@@ -2,50 +2,85 @@ appId: com.brapp.work
 ---
 - launchApp:
     clearState: false
+
+# ==============================================================================
+# Cenário: Definição inicial do Tipo de Motorista
+# ==============================================================================
+# Acessa o perfil do usuário pelo ícone do cabeçalho na tela inicial
 - tapOn:
     id: "home-header-user-icon-test-id"
+- waitForAnimationToEnd
+
+# Acessa os dados cadastrais / configurações do perfil
 - tapOn:
     point: 81%,59%
+- waitForAnimationToEnd
+
+# Rola a tela até o final para exibir a opção de Tipo de Motorista
 - scrollUntilVisible:
     element: "Excluir conta"
+    direction: DOWN
+    timeout: 30000
+- waitForAnimationToEnd
+
+# Verifica se o texto de incentivo inicial está visível
 - assertVisible: "Escolha e ganhe 200 pts"
+
+# Abre a seleção de Tipo de Motorista
 - tapOn:
     point: 81%,73%
+- waitForAnimationToEnd
+
+# Seleciona a opção "Motorista comum" e confirma
 - tapOn:
     point: 13%,19%
 - tapOn: "Confirmar"
+- waitForAnimationToEnd
+
+# Valida que o tipo selecionado está visível na tela
 - assertVisible: "Motorista comum"
 
-#Alteracao do Tipo de Motorista sem restrição
-- tapOn:
-    id: "home-header-user-icon-test-id"
-- tapOn:
-    point: 81%,59%
-- scrollUntilVisible:
-    element: "Excluir conta"
+# ==============================================================================
+# Cenário: Alteração do Tipo de Motorista sem restrição
+# ==============================================================================
+# Abre novamente a seleção de Tipo de Motorista
 - tapOn:
     point: 81%,73%
+- waitForAnimationToEnd
+
+# Seleciona outra categoria de motorista e confirma a alteração
 - tapOn:
     point: 13%,48%
 - tapOn: "Confirmar"
+- waitForAnimationToEnd
 
-#Alteracao do Tipo de Motorista com restrição
+# ==============================================================================
+# Cenário: Tentativa de alteração do Tipo de Motorista com restrição (bloqueio 3 dias)
+# ==============================================================================
+# Tenta alterar imediatamente para outra categoria
 - tapOn:
     point: 81%,73%
+- waitForAnimationToEnd
+
+# Seleciona uma nova categoria e tenta confirmar
 - tapOn:
     point: 13%,38%
 - tapOn: "Confirmar"
+- waitForAnimationToEnd
+
+# Valida a mensagem de carência/restrição de alteração
 - assertVisible: "Você já pediu a mudança do seu tipo de motorista antes. Aguarde até 3 dias para que a alteração seja concluída e tente novamente depois disso."
+
+# Confirma e fecha a mensagem de alerta
 - tapOn: "Confirmar"
+- waitForAnimationToEnd
+
+# Retorna e fecha as telas de perfil até voltar à home
 - tapOn:
     point: 9%,8%
+- waitForAnimationToEnd
 - tapOn:
     point: 9%,8%
+- waitForAnimationToEnd
 - tapOn:
     point: 85%,6%
-
-
-
-
-
-

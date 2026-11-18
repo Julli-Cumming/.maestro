@@ -1,0 +1,80 @@
+
+appId: com.brapp.work
+---
+- launchApp:
+    clearState: false
+    stopApp: true
+
+# Acessa o perfil pelo avatar no cabeçalho da home
+- extendedWaitUntil:
+    visible:
+      id: "home-header-avatar-test-id"
+    timeout: 30000
+
+- tapOn:
+    id: "home-header-avatar-test-id"
+- waitForAnimationToEnd
+- tapOn:
+    point: 81%,59%
+- waitForAnimationToEnd
+- scrollUntilVisible:
+    element: "Excluir conta"
+    direction: DOWN
+    centerElement: true
+    timeout: 30000
+- waitForAnimationToEnd
+- tapOn: "Excluir conta"
+- waitForAnimationToEnd
+- assertVisible: "Sair do App"
+- tapOn: "Continuar"
+- waitForAnimationToEnd
+- extendedWaitUntil:
+    visible: "Veja o quanto você aproveitou até hoje"
+    timeout: 20000
+- assertVisible: "Veja o quanto você aproveitou até hoje"
+- swipe:
+    start: 50%,80%
+    end: 50%,35%
+- waitForAnimationToEnd
+- tapOn: "Continuar"
+- waitForAnimationToEnd
+# ==============================================================================
+# Cenário: Informar um motivo personalizado
+# ==============================================================================
+- assertVisible: "Exclusão da conta"
+- assertVisible: "Por que você quer excluir?"
+- assertVisible: "Obrigatório"
+- scrollUntilVisible:
+    element: "E-mail"
+- tapOn: "Ligue para 4090-1337"
+- tapOn: "Visão geral"
+- tapOn:
+    id: "snapshot"
+- tapOn: "Ligue para 0800-770-1337"
+- tapOn: "Visão geral"
+- tapOn:
+    id: "snapshot"
+- tapOn: "WhatsApp"
+- tapOn: "Visão geral"
+- tapOn:
+    id: "snapshot"
+- tapOn: "E-mail"
+- tapOn: "Visão geral"
+- tapOn:
+    id: "snapshot"
+- scrollUntilVisible:
+    element: "Outro motivo"
+    direction: UP
+    timeout: 30000
+    centerElement: true
+- tapOn: "Outro motivo"
+- tapOn:
+    point: 83%,25%
+- tapOn:
+    point: 13%,30%
+- inputText: "Teste de exclusão de conta"
+- waitForAnimationToEnd
+- tapOn: "Continuar"
+- waitForAnimationToEnd
+- assertVisible: "Excluir conta permanentemente"
+- tapOn: "Excluir conta"

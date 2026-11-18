@@ -3,7 +3,7 @@ appId: com.brapp.work
 - launchApp:
     clearState: false
 - tapOn:
-    id: "home-header-user-icon-test-id"
+    id: "home-header-avatar-test-id"
 - tapOn:
     id: "undefined-icon-button"
 - tapOn:

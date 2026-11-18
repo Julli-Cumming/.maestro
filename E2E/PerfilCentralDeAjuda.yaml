@@ -6,7 +6,7 @@ appId: com.brapp.work
 - tapOn:
     point: 82%,27%
 - tapOn:
-    id: "home-header-user-icon-test-id"
+    id: "home-header-avatar-test-id"
 - scrollUntilVisible:
     element: "Precisa de ajuda?"
 - assertVisible: "Precisa de ajuda?"
